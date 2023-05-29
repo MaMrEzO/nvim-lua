@@ -1,5 +1,6 @@
 local fn = vim.fn
 local noice_config = require 'user.configs.noice-config'
+local notify_config = require 'user.configs.notify-config'
 
 -- Automatically install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
@@ -44,7 +45,6 @@ vim.cmd("packadd packer.nvim")
 
 -- Install your plugins here
 return packer.startup(function(use)
-
 	use 'wbthomason/packer.nvim'
 
 	-- UI
@@ -53,7 +53,17 @@ return packer.startup(function(use)
 		requires = {
 			'kyazdani42/nvim-web-devicons', -- optional, for file icons
 		},
-		tag = 'nightly' -- optional, updated every week. (see issue #1193)
+		tag = 'nightly'              -- optional, updated every week. (see issue #1193)
+	}
+
+	use {
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+		}
 	}
 
 	use {
@@ -83,14 +93,16 @@ return packer.startup(function(use)
 	-- Theme & Stuff
 	--use 'Rigellute/shades-of-purple.vim'
 	use "rktjmp/lush.nvim"
-	use {
-		"briones-gabriel/darcula-solid.nvim",
-	}
+	--use {
+	--	"briones-gabriel/darcula-solid.nvim",
+	--}
+	use 'Mofiqul/dracula.nvim'
 
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate',
-		config = function() require('nvim-treesitter.configs').setup({
+		config = function()
+			require('nvim-treesitter.configs').setup({
 				ensure_installed = { "lua" },
 				sync_install = true,
 				auto_install = true,
@@ -107,18 +119,44 @@ return packer.startup(function(use)
 	--}
 
 	-- LSP Configurations
-	use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
+	--use 'williamboman/nvim-lsp-installer'
+	use {
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
+		run = ":MasonUpdate"      -- :MasonUpdate updates registry contents
+	}
+	use { 'neovim/nvim-lspconfig', -- Configurations for Nvim LSP
+		--after = "nvim-lsp-installer",
+	}
 	use 'tamago324/nlsp-settings.nvim'
 	--use "ray-x/lsp_signature.nvim"-- Function signiture
 	use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
 	use 'onsails/lspkind.nvim'
-	use 'jose-elias-alvarez/null-ls.nvim'
-	use 'MunifTanjim/eslint.nvim'
+	--use 'jose-elias-alvarez/null-ls.nvim'
+	--use 'MunifTanjim/eslint.nvim'
 	use 'simrat39/symbols-outline.nvim'
 	use 'f-person/git-blame.nvim'
 	use {
 		'lewis6991/gitsigns.nvim',
 		-- tag = 'release' -- To use the latest release (do not use this if you run Neovim nightly or dev builds!)
+	}
+	use {
+		'Equilibris/nx.nvim',
+		requires = {
+			'nvim-telescope/telescope.nvim',
+		},
+		--config = function()
+		--	require("nx").setup {}
+		--end
+	}
+	use {
+		"SmiteshP/nvim-navbuddy",
+		requires = {
+			"neovim/nvim-lspconfig",
+			"SmiteshP/nvim-navic",
+			"MunifTanjim/nui.nvim"
+		}
 	}
 
 	-- Debugger
@@ -134,14 +172,13 @@ return packer.startup(function(use)
 
 
 	-- Recommend
-	use 'williamboman/nvim-lsp-installer'
 
 	-- Optional
 	--replace with noice
 	--use 'rcarriga/nvim-notify'
 
 	use 'tpope/vim-fugitive'
-	--use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+	use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
 	-- Autocompletion
 	use {
@@ -149,10 +186,10 @@ return packer.startup(function(use)
 		'hrsh7th/cmp-buffer',
 		'hrsh7th/cmp-path',
 		'hrsh7th/cmp-cmdline',
-		'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+		'hrsh7th/cmp-nvim-lsp'    -- LSP source for nvim-cmp
 	}
 	use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
-	use 'L3MON4D3/LuaSnip' -- Snippets plugin
+	use 'L3MON4D3/LuaSnip'       -- Snippets plugin
 
 
 
@@ -164,10 +201,19 @@ return packer.startup(function(use)
 		requires = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
+			({
+				"rcarriga/nvim-notify",
+				config = notify_config,
+			}),
 		}
 	})
 
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = "cd app && npm install",
+		setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+		ft = { "markdown" },
+	})
 	--Ghost editor for Google - Chrome
 	-- use({
 	--	'subnut/nvim-ghost.nvim',

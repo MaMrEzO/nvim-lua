@@ -20,5 +20,13 @@ require 'user.mapping.mapping';
 --Problematics
 require 'user.setups.nvim-navic';
 --require 'user.setups.winbar';
---require 'user.setups.eslint';
+require 'user.setups.eslint';
 --require 'user.setups.dressing';
+require 'user.setups.navbuddy';
+--require 'user.setups.mason';
+require "notify".setup(
+	{
+		render = "compact",
+		top_down = false
+	}
+);

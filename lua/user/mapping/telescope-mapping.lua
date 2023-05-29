@@ -3,6 +3,7 @@ local opts = require 'user.configs.mapping'
 
 vim.keymap.set('n', "<LEADER>l", ':Telescope find_files<CR>', opts)
 vim.keymap.set('n', "<LEADER><LEADER>", ':Telescope find_files<CR>', opts)
+vim.keymap.set('n', "<LEADER>r", ":Telescope resume<CR>", opts)
 vim.keymap.set('n', "<LEADER>g", ":Telescope live_grep<CR>", opts)
 vim.keymap.set('n', "<LEADER>l", ':Telescope find_files<CR>', opts)
 vim.keymap.set('n', "<space>o", ":Telescope lsp_document_symbols<CR>", opts)

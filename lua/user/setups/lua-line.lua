@@ -46,7 +46,7 @@ local diagnonistics = {
 	--   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
 	-- or a function that returns a table as such:
 	--   { error=error_cnt, warn=warn_cnt, info=info_cnt, hint=hint_cnt }
-	sources = { 'nvim_diagnostic', 'coc' },
+	sources = { 'nvim_diagnostic' },
 
 	-- Displays diagnostics for the defined severity types
 	sections = { 'error', 'warn', 'info', 'hint' },
@@ -126,7 +126,7 @@ require('lualine').setup {
 		lualine_x = {},
 		lualine_y = { 'encoding', 'fileformat', 'filetype', 'progress' },
 		lualine_z = {
-			{ 'location', separator = { right = '' }, left_padding = 1 },
+			{ 'location', separator = { right = '' }, left_padding = 2 },
 		}
 	},
 	inactive_sections = {
@@ -142,7 +142,7 @@ require('lualine').setup {
 		lualine_a = {},
 		lualine_b = { { 'filename', separator = { left = '' }, right_padding = 2 }, },
 		lualine_c = {
-			{ navic.get_location, cond = navic.is_available, separator = { right = '' }, left_padding = 2 },
+			{ navic.get_location, cond = navic.is_available, separator = { right = '' }, left_padding = 10 },
 		},
 		lualine_x = {},
 		lualine_y = {},

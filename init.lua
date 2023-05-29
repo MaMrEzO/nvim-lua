@@ -1,6 +1,7 @@
 require "user.plugins"
+--require "user.nlsp"
+require 'user.setups.mason'
 require "user.lsp"
-require "user.nlsp"
 require "user.nvim-cmp"
 require "user.options"
 require "user.setups"

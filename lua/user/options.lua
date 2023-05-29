@@ -63,7 +63,6 @@ vim.filetype.add({
   },
 })
 
-vim.cmd('colorscheme darcula-solid')
 --vim.cmd('colorscheme shades_of_purple')
 ----Shade of purple customization's
 --vim.cmd('hi LineNr ctermfg=140 ctermbg=235 guifg=#a599e9 guibg=#2d2b55')
@@ -74,6 +73,7 @@ vim.cmd('colorscheme darcula-solid')
 
 -- Normal        xxx guifg=#ced1d4 guibg=#262627
 -- NormalNC      xxx guifg=#ced1d4 guibg=#232324
+vim.cmd('colorscheme darcula-solid')
 vim.cmd('hi Normal guifg=#ced1d4 guibg=#232324')
 vim.cmd('hi NormalNC guifg=#ced1d4 guibg=#232324')
 vim.cmd('hi CursorLine guibg=Grey10')
@@ -81,11 +81,13 @@ vim.cmd('hi Visual guibg=Grey30')
 vim.cmd('hi! link Type Structure');
 vim.cmd('hi! link @property Structure');
 vim.cmd('hi! link @variable.builtin Keyword');
-
+vim.cmd('hi! link @constructor @tag');
 --CursorLine    xxx cterm=underline guibg=Grey40
 
 --vim.cmd('let g:vim_markdown_conceal = 1')
 --vim.cmd('let g:vim_markdown_conceal_code_blocks = 1')
+
+--vim.cmd('colorscheme dracula')
 local soft_tab_2 = function() vim.cmd('set tabstop=2 shiftwidth=2 expandtab') end
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {
