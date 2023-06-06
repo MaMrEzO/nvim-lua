@@ -111,7 +111,8 @@ return packer.startup(function(use)
 
 	}
 	use 'nvim-treesitter/playground'
-	use 'norcalli/nvim-colorizer.lua'
+  use 'brenoprata10/nvim-highlight-colors'
+	-- not use 'norcalli/nvim-colorizer.lua'
 	--use{ 'anuvyklack/pretty-fold.nvim',
 	--  config = function()
 	--    require('pretty-fold').setup()
@@ -158,6 +159,7 @@ return packer.startup(function(use)
 			"MunifTanjim/nui.nvim"
 		}
 	}
+	use "lvimuser/lsp-inlayhints.nvim"
 
 	-- Debugger
 	use 'mfussenegger/nvim-dap'
@@ -169,8 +171,15 @@ return packer.startup(function(use)
 	}
 	use 'theHamsta/nvim-dap-virtual-text'
 	use 'rcarriga/cmp-dap'
+	use 'leoluz/nvim-dap-go'
+	use 'theHamsta/nvim-dap-virtual-text'
+	use 'LiadOz/nvim-dap-repl-highlights'
 
-
+	use {
+		-- used to dap-ext-vscode JSON decoder
+		'Joakker/lua-json5',
+		run = './install.sh'
+	}
 	-- Recommend
 
 	-- Optional
@@ -191,7 +200,9 @@ return packer.startup(function(use)
 	use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
 	use 'L3MON4D3/LuaSnip'       -- Snippets plugin
 
-
+  --Colorize ansi output
+  --use { 'm00qek/baleia.nvim', tag = 'v1.3.0' }
+  use 'norcalli/nvim-terminal.lua'
 
 	use { 'stevearc/dressing.nvim' }
 	use({

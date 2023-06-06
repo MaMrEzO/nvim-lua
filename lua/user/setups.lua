@@ -16,6 +16,7 @@ require 'user.mapping.flutter-toole-mapping'
 require 'user.mapping.vim-fugitive';
 require 'user.mapping.mapping';
 
+require 'user.setups.highlight-colors';
 
 --Problematics
 require 'user.setups.nvim-navic';
@@ -30,3 +31,11 @@ require "notify".setup(
 		top_down = false
 	}
 );
+
+require "user.setups.dap";
+require "user.setups.dap-ui";
+require "user.setups.go-dap";
+require "user.setups.dap-virtual-text";
+
+--require('baleia').setup { }
+require'terminal'.setup()

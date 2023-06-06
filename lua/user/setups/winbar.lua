@@ -1,5 +1,5 @@
 require('winbar').setup({
-	enabled = true,
+	enabled = false,
 
 	show_file_path = true,
 	show_symbols = true,

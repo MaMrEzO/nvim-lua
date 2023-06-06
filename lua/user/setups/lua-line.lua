@@ -98,13 +98,12 @@ require('lualine').setup {
 		--theme = 'codedark',
 		--theme = 'palenight',--shades of purpule
 		--component_separators = { left = '', right = '' },
-		--section_separators = { left = '', right = '' },
+		section_separators = { left = '', right = '' },
 		theme = bubbles_theme,
-		component_separators = '|',
-		section_separators = { left = '', right = '' },
+		component_separators = '│',
 		disabled_filetypes = {
 			statusline = { "NvimTree", "Outline" },
-			winbar = { "NvimTree", "Outline", "Scratch", "Noice", "nui" },
+			winbar = { "NvimTree", "Outline", "Scratch", "Noice", "nui", "dap-repl" },
 		},
 		ignore_focus = {},
 		always_divide_middle = true,
@@ -117,7 +116,7 @@ require('lualine').setup {
 	},
 	sections = {
 		lualine_a = {
-			{ 'mode', separator = { left = '' }, right_padding = 2 },
+			{ 'mode', right_padding = 2 },
 		},
 		lualine_b = { branch, diff, filename },
 		lualine_c = {
@@ -126,7 +125,7 @@ require('lualine').setup {
 		lualine_x = {},
 		lualine_y = { 'encoding', 'fileformat', 'filetype', 'progress' },
 		lualine_z = {
-			{ 'location', separator = { right = '' }, left_padding = 2 },
+			{ 'location', left_padding = 2 },
 		}
 	},
 	inactive_sections = {
@@ -140,9 +139,9 @@ require('lualine').setup {
 	tabline = {},
 	winbar = {
 		lualine_a = {},
-		lualine_b = { { 'filename', separator = { left = '' }, right_padding = 2 }, },
+		lualine_b = { { 'filename', right_padding = 2 }, },
 		lualine_c = {
-			{ navic.get_location, cond = navic.is_available, separator = { right = '' }, left_padding = 10 },
+			{ navic.get_location, cond = navic.is_available, left_padding = 10 },
 		},
 		lualine_x = {},
 		lualine_y = {},
@@ -153,3 +152,67 @@ require('lualine').setup {
 	},
 	extensions = {}
 }
+--require('lualine').setup {
+--	options = {
+--		icons_enabled = true,
+--		--theme = 'gruvbox-material',
+--		--theme = 'nightfly',
+--		--theme = 'dracula',
+--		--theme = 'codedark',
+--		--theme = 'palenight',--shades of purpule
+--		--component_separators = { left = '', right = '' },
+--		--section_separators = { left = '', right = '' },
+--		theme = bubbles_theme,
+--		component_separators = '|',
+--		section_separators = { left = '', right = '' },
+--		disabled_filetypes = {
+--			statusline = { "NvimTree", "Outline" },
+--			winbar = { "NvimTree", "Outline", "Scratch", "Noice", "nui" },
+--		},
+--		ignore_focus = {},
+--		always_divide_middle = true,
+--		globalstatus = false,
+--		refresh = {
+--			statusline = 1000,
+--			tabline = 1000,
+--			winbar = 1000,
+--		}
+--	},
+--	sections = {
+--		lualine_a = {
+--			{ 'mode', separator = { left = '' }, right_padding = 2 },
+--		},
+--		lualine_b = { branch, diff, filename },
+--		lualine_c = {
+--			diagnonistics,
+--		},
+--		lualine_x = {},
+--		lualine_y = { 'encoding', 'fileformat', 'filetype', 'progress' },
+--		lualine_z = {
+--			{ 'location', separator = { right = '' }, left_padding = 2 },
+--		}
+--	},
+--	inactive_sections = {
+--		lualine_a = {},
+--		lualine_b = {},
+--		lualine_c = { 'filename' },
+--		lualine_x = { 'location' },
+--		lualine_y = { 'filename' },
+--		lualine_z = {}
+--	},
+--	tabline = {},
+--	winbar = {
+--		lualine_a = {},
+--		lualine_b = { { 'filename', separator = { left = '' }, right_padding = 2 }, },
+--		lualine_c = {
+--			{ navic.get_location, cond = navic.is_available, separator = { right = '' }, left_padding = 10 },
+--		},
+--		lualine_x = {},
+--		lualine_y = {},
+--		lualine_z = { { 'tabs', mode = 2 } }
+--	},
+--	inactive_winbar = {
+--		lualine_a = { 'filename' },
+--	},
+--	extensions = {}
+--}
