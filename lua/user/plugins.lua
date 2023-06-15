@@ -1,6 +1,8 @@
 local fn = vim.fn
 local noice_config = require 'user.configs.noice-config'
 local notify_config = require 'user.configs.notify-config'
+local neo_tree_config = require 'user.configs.neo-tree'
+local nivm_window_picker = require 'user.configs.nvim-window-picker'
 
 -- Automatically install packer
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
@@ -55,7 +57,22 @@ return packer.startup(function(use)
 		},
 		tag = 'nightly'              -- optional, updated every week. (see issue #1193)
 	}
-
+	use {
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v2.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+			{
+				-- only needed if you want to use the commands with "_with_window_picker" suffix
+				's1n7ax/nvim-window-picker',
+				tag = "v1.*",
+				config = nivm_window_picker,
+			}
+		},
+		config = neo_tree_config
+	}
 	use {
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
@@ -111,7 +128,7 @@ return packer.startup(function(use)
 
 	}
 	use 'nvim-treesitter/playground'
-  use 'brenoprata10/nvim-highlight-colors'
+	use 'brenoprata10/nvim-highlight-colors'
 	-- not use 'norcalli/nvim-colorizer.lua'
 	--use{ 'anuvyklack/pretty-fold.nvim',
 	--  config = function()
@@ -200,9 +217,9 @@ return packer.startup(function(use)
 	use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
 	use 'L3MON4D3/LuaSnip'       -- Snippets plugin
 
-  --Colorize ansi output
-  --use { 'm00qek/baleia.nvim', tag = 'v1.3.0' }
-  use 'norcalli/nvim-terminal.lua'
+	--Colorize ansi output
+	--use { 'm00qek/baleia.nvim', tag = 'v1.3.0' }
+	use 'norcalli/nvim-terminal.lua'
 
 	use { 'stevearc/dressing.nvim' }
 	use({
