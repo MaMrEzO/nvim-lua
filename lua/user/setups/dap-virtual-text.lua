@@ -17,9 +17,9 @@ require("nvim-dap-virtual-text").setup {
   --- @return string|nil A text how the virtual text should be displayed or nil, if this variable shouldn't be displayed
   display_callback = function(variable, buf, stackframe, node, options)
     if options.virt_text_pos == 'inline' then
-      return ' = ' .. variable.value
+      return ' =<| ' .. variable.value
     else
-      return variable.name .. ' = ' .. variable.value
+      return variable.name .. ' =|> ' .. variable.value
     end
   end,
   -- position of virtual text, see `:h nvim_buf_set_extmark()`, default tries to inline the virtual text. Use 'eol' to set to end of line

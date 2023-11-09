@@ -1,10 +1,13 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = {
-		--'cspell',
-		'eslint',
+		--'cspells',
+		--'eslint',
+		--'golangci_lint_ls',
+		--'buf',
+		--'protolint',
+		--'grammarly',
 		'gopls',
-		'grammarly',
 		'html',
 		'lua_ls',
 		'svelte',
@@ -12,6 +15,5 @@ require("mason-lspconfig").setup({
 		'tsserver',
 		'cssls',
 		'jsonls',
-		--'protolint',
 	},
 })

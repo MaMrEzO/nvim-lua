@@ -1,4 +1,11 @@
-require('telescope').setup {
+local center_list = require "telescope.themes".get_dropdown({
+	winblend = 10,
+	width = 0.5,
+	prompt = " ",
+	results_height = 15,
+	previewer = false,
+})
+require('telescope').setup({
 	defaults = {
 		file_ignore_patterns = {
 			".vscode",
@@ -8,26 +15,31 @@ require('telescope').setup {
 			"public",
 			"build",
 
-		}
-	},
-	extensions = {
-		file_browser = {
-			theme = "ivy",
-			-- disables netrw and use telescope-file-browser in its place
-			hijack_netrw = true,
-			mappings = {
-				["i"] = {
-					-- your custom insert mode mappings
-				},
-				["n"] = {
-					-- your custom normal mode mappings
+		},
+		layout_config = {
+			width = 0.9,
+			height = 0.9,
+			--preview_width = 0.35,
+			horizontal = {
+				width = {
+					padding = 0.01,
 				},
 			},
+			vertical = {
+				preview_height = 0.75,
+			},
+		},
+		--theme = center_list,
+	},
+
+	border = false,
+	extensions = {
+		file_browser = {
 		},
 	},
-}
+})
 
-require("telescope").load_extension("file_browser")
+--require("telescope").load_extension("file_browser")
 require("telescope").load_extension("live_grep_args")
 require("telescope").load_extension("notify")
 

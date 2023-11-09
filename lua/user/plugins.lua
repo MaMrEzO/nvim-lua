@@ -35,6 +35,26 @@ end
 
 -- Have packer use a popup window
 packer.init {
+	git = {
+		cmd = 'git', -- The base command for git operations
+		subcommands = {
+			-- Format strings for git subcommands
+			update         = 'pull --ff-only --progress --rebase=false',
+			install        = 'clone --depth %i --no-single-branch --progress',
+			fetch          = 'fetch --depth 999999 --progress',
+			checkout       = 'checkout %s --',
+			update_branch  = 'merge --ff-only @{u}',
+			current_branch = 'branch --show-current',
+			diff           = 'log --color=never --pretty=format:FMT --no-show-signature HEAD@{1}...HEAD',
+			diff_fmt       = '%%h %%s (%%cr)',
+			get_rev        = 'rev-parse --short HEAD',
+			get_msg        = 'log --color=never --pretty=format:FMT --no-show-signature HEAD -n 1',
+			submodules     = 'submodule update --init --recursive --progress'
+		},
+		depth = 1,                               -- Git clone depth
+		clone_timeout = 600,                     -- Timeout, in seconds, for git clones
+		default_url_format = 'https://github.com/%s' -- Lua format string used for "aaa/bbb" style plugins
+	},
 	display = {
 		open_fn = function()
 			return require("packer.util").float { border = "rounded" }
@@ -50,13 +70,13 @@ return packer.startup(function(use)
 	use 'wbthomason/packer.nvim'
 
 	-- UI
-	use {
-		'kyazdani42/nvim-tree.lua',
-		requires = {
-			'kyazdani42/nvim-web-devicons', -- optional, for file icons
-		},
-		tag = 'nightly'              -- optional, updated every week. (see issue #1193)
-	}
+	--use {
+	--	'kyazdani42/nvim-tree.lua',
+	--	requires = {
+	--		'kyazdani42/nvim-web-devicons', -- optional, for file icons
+	--	},
+	--	tag = 'nightly'    -- optional, updated every week. (see issue #1193)
+	--}
 	use {
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v2.x",
@@ -73,25 +93,47 @@ return packer.startup(function(use)
 		},
 		config = neo_tree_config
 	}
+	--use {
+	--	"nvim-neo-tree/neo-tree.nvim",
+	--	branch = "v2.x",
+	--	requires = {
+	--		"nvim-lua/plenary.nvim",
+	--		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+	--		"MunifTanjim/nui.nvim",
+	--	}
+	--}
+
 	use {
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v2.x",
+		'nvim-telescope/telescope.nvim', tag = '0.1.2',
+		-- or                            , branch = '0.1.x',
 		requires = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
+			{ 'nvim-lua/plenary.nvim', },
+			{ "nvim-telescope/telescope-live-grep-args.nvim" },
 		}
 	}
 
-	use {
-		'nvim-telescope/telescope.nvim', tag = '0.1.0',
-		-- or                            , branch = '0.1.x',
-		requires = { { 'nvim-lua/plenary.nvim', "nvim-telescope/telescope-live-grep-args.nvim" } }
-	}
+	--use "telescope-file-browser.nvim"
 
-	use "https://github.com/nvim-telescope/telescope-file-browser.nvim"
+	---- gh github-cli
+	--use {
+	--	'ldelossa/gh.nvim',
+	--	requires = { { 'ldelossa/litee.nvim' } }
+	--}
 
-	use "lukas-reineke/indent-blankline.nvim"
+	--use {
+	--	'harrisoncramer/gitlab.nvim',
+	--	requires = {
+	--		"MunifTanjim/nui.nvim",
+	--		"nvim-lua/plenary.nvim"
+	--	},
+	--	run = function() require("gitlab").build() end,
+	--	config = function()
+	--		require("gitlab").setup()
+	--	end,
+	--}
+
+	--use "lukas-reineke/indent-blankline.nvim"
+	--use "nvimdev/indentmini.nvim"
 
 	-- Bars ...
 	use {
@@ -99,21 +141,30 @@ return packer.startup(function(use)
 		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
 	}
 	--Checking if make faulty noice
-	use 'fgheng/winbar.nvim'
-	use {
-		"SmiteshP/nvim-navic",
-		requires = "neovim/nvim-lspconfig"
-	}
-
+	--use 'fgheng/winbar.nvim'
+	--use {
+	--	"SmiteshP/nvim-navic",
+	--	requires = "neovim/nvim-lspconfig"
+	--}
+	use 'Bekaboo/dropbar.nvim'
 	use 'ThePrimeagen/harpoon'
 
 	-- Theme & Stuff
 	--use 'Rigellute/shades-of-purple.vim'
 	use "rktjmp/lush.nvim"
+	use {
+		"briones-gabriel/darcula-solid.nvim",
+		requires = "rktjmp/lush.nvim"
+	}
+	use({ 'projekt0n/github-nvim-theme' })
+	use { "catppuccin/nvim", as = "catppuccin" }
+	use 'marko-cerovac/material.nvim'
+	use 'Shatur/neovim-ayu'
+
 	--use {
-	--	"briones-gabriel/darcula-solid.nvim",
+	--	"folke/zen-mode.nvim",
 	--}
-	use 'Mofiqul/dracula.nvim'
+	--use 'Mofiqul/dracula.nvim'
 
 	use {
 		'nvim-treesitter/nvim-treesitter',
@@ -142,11 +193,21 @@ return packer.startup(function(use)
 		"williamboman/mason.nvim",
 		"williamboman/mason-lspconfig.nvim",
 		"neovim/nvim-lspconfig",
-		run = ":MasonUpdate"      -- :MasonUpdate updates registry contents
+		run = ":MasonUpdate" -- :MasonUpdate updates registry contents
 	}
-	use { 'neovim/nvim-lspconfig', -- Configurations for Nvim LSP
-		--after = "nvim-lsp-installer",
+	use {
+		'jay-babu/mason-null-ls.nvim',
+		requires = {
+			'williamboman/mason.nvim',
+			'jose-elias-alvarez/null-ls.nvim',
+		},
+		--config = function()
+		--	require("nx").setup {}
+		--end
 	}
+	--use { 'neovim/nvim-lspconfig', -- Configurations for Nvim LSP
+	--	--after = "nvim-lsp-installer",
+	--}
 	use 'tamago324/nlsp-settings.nvim'
 	--use "ray-x/lsp_signature.nvim"-- Function signiture
 	use { 'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim' }
@@ -168,15 +229,16 @@ return packer.startup(function(use)
 		--	require("nx").setup {}
 		--end
 	}
-	use {
-		"SmiteshP/nvim-navbuddy",
-		requires = {
-			"neovim/nvim-lspconfig",
-			"SmiteshP/nvim-navic",
-			"MunifTanjim/nui.nvim"
-		}
-	}
-	use "lvimuser/lsp-inlayhints.nvim"
+	--use {
+	--	"SmiteshP/nvim-navbuddy",
+	--	
+	--	requires = {
+	--		"neovim/nvim-lspconfig",
+	--		"SmiteshP/nvim-navic",
+	--		"MunifTanjim/nui.nvim"
+	--	}
+	--}
+	--use "lvimuser/lsp-inlayhints.nvim"
 
 	-- Debugger
 	use 'mfussenegger/nvim-dap'
@@ -189,8 +251,13 @@ return packer.startup(function(use)
 	use 'theHamsta/nvim-dap-virtual-text'
 	use 'rcarriga/cmp-dap'
 	use 'leoluz/nvim-dap-go'
-	use 'theHamsta/nvim-dap-virtual-text'
 	use 'LiadOz/nvim-dap-repl-highlights'
+
+	use {
+		"microsoft/vscode-js-debug",
+		opt = true,
+		run = "npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out"
+	}
 
 	use {
 		-- used to dap-ext-vscode JSON decoder
@@ -235,6 +302,8 @@ return packer.startup(function(use)
 			}),
 		}
 	})
+
+	use "chiedo/vim-case-convert"
 
 	use({
 		"iamcco/markdown-preview.nvim",

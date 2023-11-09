@@ -1,6 +1,16 @@
 --Nvim Tree setup and mapping
-local config = require'user.configs.nvim-tree-config'
-local opts = require'user.configs.mapping'
-require('nvim-tree').setup(config)
+--local config = require'user.configs.nvim-tree-config'
+--local opts = require'user.configs.mapping'
+--require('nvim-tree').setup(config)
 
-vim.keymap.set('n', "<space>l", ':NvimTreeFindFile<CR>', opts)
+--vim.keymap.set('n', "<space>l", ':NvimTreeFindFile<CR>', opts)
+--function focus_or_open_neo-tree() 
+--	local file_name = vim. api. nvim_buf_get_name(0)
+--	if not file_name then
+--	
+--	else 
+--
+--	end
+--
+--end
+--vim.keymap.set('n', "<space>l", ':NvimTreeFindFile<CR>', opts)
