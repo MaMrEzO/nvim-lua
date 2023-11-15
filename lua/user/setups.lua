@@ -1,4 +1,4 @@
---require 'user.setups.diffview';
+require 'user.setups.diffview';
 require 'user.setups.nvim-web-devicons';
 require 'user.setups.tree-sitter';
 require 'user.setups.lua-line';

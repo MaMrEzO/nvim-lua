@@ -13,7 +13,7 @@ return {
 				row = 5,
 				col = 5,
 			},
-		}
+		},
 	},
 	actions = {
 		use_system_clipboard = true,

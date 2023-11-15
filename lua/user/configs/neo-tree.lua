@@ -1,7 +1,6 @@
 return function()
   -- Unless you are still migrating, remove the deprecated commands from v1.x
   vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-  print("NEO-TREE-CONF")
 
   -- If you want icons for diagnostic errors, you'll need to define them somewhere:
   vim.fn.sign_define("DiagnosticSignError",
@@ -14,15 +13,14 @@ return function()
     { text = "", texthl = "DiagnosticSignHint" })
   -- NOTE: this is changed from v1.x, which used the old style of highlight groups
   -- in the form "LspDiagnosticsSignWarning"
-  print("Initiatin neo-tree")
   require("neo-tree").setup({
     close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
     popup_border_style = "rounded",
     enable_git_status = true,
     enable_diagnostics = true,
     open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
-    sort_case_insensitive = false,                                   -- used when sorting files and directories in the tree
-    sort_function = nil,                                             -- use a custom function for sorting files and directories in the tree
+    sort_case_insensitive = false,                                     -- used when sorting files and directories in the tree
+    sort_function = nil,                                               -- use a custom function for sorting files and directories in the tree
     -- sort_function = function (a,b)
     --       if a.type == b.type then
     --           return a.path > b.path
@@ -30,6 +28,9 @@ return function()
     --           return a.type > b.type
     --       end
     --   end , -- this sorts files and directories descendantly
+    view = {
+      relativenumber = true,
+    },
     default_component_configs = {
       container = {
         enable_character_fade = true
@@ -40,7 +41,7 @@ return function()
         -- indent guides
         with_markers = true,
         indent_marker = "│",
-        last_indent_marker = "╰─",
+        last_indent_marker = "╰ ",
         highlight = "NeoTreeIndentMarker",
         -- expander config, needed for nesting files
         with_expanders = nil, -- if nil and file nesting is enabled, will enable expanders
@@ -170,9 +171,9 @@ return function()
           --".null-ls_*",
         },
       },
-      follow_current_file = false,         -- This will find and focus the file in the active buffer every
+      follow_current_file = false,            -- This will find and focus the file in the active buffer every
       -- time the current file is changed while the tree is open.
-      group_empty_dirs = false,            -- when true, empty folders will be grouped together
+      group_empty_dirs = false,               -- when true, empty folders will be grouped together
       hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
       -- in whatever position is specified in window.position
       -- "open_current",  -- netrw disabled, opening a directory opens within the
@@ -207,7 +208,7 @@ return function()
     buffers = {
       follow_current_file = true, -- This will find and focus the file in the active buffer every
       -- time the current file is changed while the tree is open.
-      group_empty_dirs = true, -- when true, empty folders will be grouped together
+      group_empty_dirs = true,    -- when true, empty folders will be grouped together
       show_unloaded = true,
       window = {
         mappings = {

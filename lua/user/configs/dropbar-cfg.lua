@@ -4,9 +4,9 @@ return {
     ---@type boolean|fun(buf: integer, win: integer): boolean
     enable = function(buf, win)
       return not vim.api.nvim_win_get_config(win).zindex
-        and vim.bo[buf].buftype == ''
-        and vim.api.nvim_buf_get_name(buf) ~= ''
-        and not vim.wo[win].diff
+          and vim.bo[buf].buftype == ''
+          and vim.api.nvim_buf_get_name(buf) ~= ''
+          and not vim.wo[win].diff
     end,
     update_events = {
       win = {
@@ -129,8 +129,8 @@ return {
         local win_height = vim.api.nvim_win_get_height(win)
         local topline = range.start.line - math.floor(win_height / 4)
         if
-          topline > view.topline
-          and topline + win_height < vim.fn.line('$')
+            topline > view.topline
+            and topline + win_height < vim.fn.line('$')
         then
           view.topline = topline
           vim.fn.winrestview(view)
@@ -140,29 +140,32 @@ return {
   },
   bar = {
     ---@type dropbar_source_t[]|fun(buf: integer, win: integer): dropbar_source_t[]
-    sources = function(_, _)
-      local sources = require('dropbar.sources')
-      return {
-        sources.path,
-        {
-          get_symbols = function(buf, win, cursor)
-            if vim.bo[buf].ft == 'markdown' then
-              return sources.markdown.get_symbols(buf, win, cursor)
-            end
-            for _, source in ipairs({
-              sources.lsp,
-              sources.treesitter,
-            }) do
-              local symbols = source.get_symbols(buf, win, cursor)
-              if not vim.tbl_isempty(symbols) then
-                return symbols
-              end
-            end
-            return {}
-          end,
-        },
-      }
-    end,
+    --sources = function(_, _)
+    --  local sources = require('dropbar.sources')
+    --  return {
+    --    sources.path,
+    --    {
+    --      get_symbols = function(buf, win, cursor)
+    --        if vim.bo[buf].ft == 'markdown' then
+    --          return sources.markdown.get_symbols(buf, win, cursor)
+    --        end
+    --        for _, source in ipairs({
+    --          sources.lsp,
+    --          sources.treesitter,
+    --        }) do
+    --          if source.get_symbols then
+    --            print(source)
+    --            local symbols = source.get_symbols(buf, win, cursor)
+    --            if not vim.tbl_isempty(symbols) then
+    --              return symbols
+    --            end
+    --          end
+    --        end
+    --        return {}
+    --      end,
+    --    },
+    --  }
+    --end,
     padding = {
       left = 1,
       right = 1,
@@ -251,7 +254,7 @@ return {
         return menu.prev_menu
             and menu.prev_menu.clicked_at
             and menu.prev_menu.clicked_at[1] - vim.fn.line('w0')
-          or 1
+            or 1
       end,
       col = function(menu)
         return menu.prev_menu and menu.prev_menu._win_configs.width or 0
@@ -268,7 +271,7 @@ return {
           math.min(
             #menu.entries,
             vim.go.pumheight ~= 0 and vim.go.pumheight
-              or math.ceil(vim.go.lines / 4)
+            or math.ceil(vim.go.lines / 4)
           )
         )
       end,

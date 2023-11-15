@@ -2,6 +2,7 @@
 --local navbuddy = require("nvim-navbuddy")
 --local lsp_sig = require('lsp_signature')
 
+require("mason").setup()
 require('mason-lspconfig').setup {}
 
 local use = require('packer').use
@@ -380,7 +381,7 @@ local servers = {
 	'tailwindcss',
 	'tsserver',
 	'cssls',
-	'buf_language_server',
+	--'buf_language_server',
 	'bufls'
 }
 for _, lsp in ipairs(servers) do
