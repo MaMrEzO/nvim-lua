@@ -41,7 +41,7 @@ return require('lazy').setup({
   --}
   {
     'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v2.x',
+    branch = 'v3.x',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
@@ -68,7 +68,7 @@ return require('lazy').setup({
 
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.2',
+    tag = '0.1.5',
     -- or                            , branch = '0.1.x',
     dependencies = {
       { 'nvim-lua/plenary.nvim', },
@@ -76,7 +76,7 @@ return require('lazy').setup({
     }
   },
 
-  -- 'telescope-file-browser.nvim'
+  'nvim-telescope/telescope-file-browser.nvim',
 
   ---- gh github-cli
   -- {
@@ -111,7 +111,7 @@ return require('lazy').setup({
   --	dependencies = 'neovim/nvim-lspconfig'
   --}
   {
-    'Bekaboo/dropbar.nvim',--3daffc1
+    'Bekaboo/dropbar.nvim', --3daffc1
     commit = '3daffc1',
     dependencies = {
       'nvim-telescope/telescope-fzf-native.nvim'
@@ -222,6 +222,7 @@ return require('lazy').setup({
   'rcarriga/cmp-dap',
   'leoluz/nvim-dap-go',
   'LiadOz/nvim-dap-repl-highlights',
+  'mxsdev/nvim-dap-vscode-js',
 
   {
     'microsoft/vscode-js-debug',
@@ -276,10 +277,13 @@ return require('lazy').setup({
   'chiedo/vim-case-convert',
 
   {
-    'iamcco/markdown-preview.nvim',
-    build = 'cd app && npm install',
-    setup = function() vim.g.mkdp_filetypes = { 'markdown' } end,
-    ft = { 'markdown' },
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
   },
   --Ghost editor for Google - Chrome
   -- ({

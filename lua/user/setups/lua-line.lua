@@ -34,7 +34,7 @@ local branch = {
 local filename = {
 	'filename',
 	on_click = function()
-		vim.cmd('NvimTreeFindFile')
+		vim.cmd('Nvimtree reveal')
 	end,
 }
 
@@ -79,7 +79,7 @@ local diff = {
 	},
 	on_click = function()
 		vim.cmd('tabnew')
-		vim.cmd('G')
+		vim.cmd('DiffviewOpen')
 	end
 }
 

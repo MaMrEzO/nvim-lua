@@ -6,17 +6,22 @@ require 'user.setups.telescope';
 require 'user.setups.symbol-outline';
 --require 'user.setups.indent_blankline';
 require 'user.setups.gitsigns';
+require 'user.setups.git-blame';
 require "user.setups.dropbar-setup";
 --
 --mappings
 --
 --require 'user.mapping.telescope'
+require 'user.mapping.yanki'
+require 'user.mapping.global'
+require 'user.mapping.neo-tree'
 require 'user.mapping.nvim-tree'
 require 'user.mapping.harpoon'
 --require 'user.mapping.flutter-toole-mapping'
 require 'user.mapping.vim-fugitive';
 require 'user.mapping.mapping';
 require 'user.mapping.dropbar-mapping';
+require 'user.mapping.theme';
 
 require 'user.setups.highlight-colors';
 

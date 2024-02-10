@@ -145,7 +145,7 @@ require("diffview").setup({
       ["[x"]            = actions.prev_conflict,
       ["]x"]            = actions.next_conflict,
       ["cc"]            = function()
-        vim.ui.input({ prompt = "Commit message: " }, function(msg)
+        vim.ui.input({ prompt = "Commit message                                       :" }, function(msg)
           if not msg then return end
           local results = vim.system({ "git", "commit", "-m", msg }, { text = true }):wait()
           if results.code ~= 0 then

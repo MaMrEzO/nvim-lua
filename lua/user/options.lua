@@ -32,7 +32,7 @@ local options = {
   laststatus = 0,
   showcmd = false,
   ruler = false,
-  --relativenumber = true, -- set relative numbered lines
+  relativenumber = true, -- set relative numbered lines
   numberwidth = 4,           -- set number column width to 2 {default 4}
   signcolumn = "yes",        -- always show the sign column, otherwise it would shift the text each time
   wrap = false,              -- display lines as one long line
@@ -41,6 +41,9 @@ local options = {
   guifont = "monospace:h17", -- the font used in graphical neovim applications
 }
 vim.cmd("set noarabicshape")
+vim.cmd("set noarabic")
+vim.cmd("set termbidi")
+
 vim.o.mouse = "a"
 vim.o.fillchars = "vert:▏,eob: "
 vim.g.loaded_netrw = 1
@@ -137,7 +140,7 @@ require('github-theme').setup({
 -- setup must be called before loading
 --vim.cmd('colorscheme github_dark')
 -- setup must be called before loading
-vim.cmd('colorscheme github_dark_colorblind')
+vim.cmd('colorscheme github_dark')
 local soft_tab_2 = function() vim.cmd('set tabstop=2 shiftwidth=2 expandtab') end
 
 vim.api.nvim_create_autocmd({ 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' }, {

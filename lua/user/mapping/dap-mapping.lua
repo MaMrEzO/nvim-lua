@@ -10,6 +10,7 @@ vim.keymap.set('n', "<C-k>", ":lua require(\"dapui\").eval()<CR>", opts)
 vim.keymap.set('n', "<F5>", ":lua require'dap'.continue()<CR>", opts)
 vim.keymap.set('n', "<F17>", ":DapLoadLaunchJSON<CR>", opts)
 vim.keymap.set('n', "<S-F5>", ":DapLoadLaunchJSON<CR>", opts)
+vim.keymap.set('n', "<F29>", ":lua require('dap-go').debug_test()", opts)
 vim.keymap.set('n', "<C-F5>", ":lua require('dap-go').debug_test()", opts)
 --Stepping through code via :lua require'dap'.step_over() and :lua require'dap'.step_into().
 vim.keymap.set('n', "<F11>", ":lua require'dap'.step_into()<CR>", opts)

@@ -16,6 +16,11 @@ vim.keymap.set('v', "<space>g", ":diffget<cr>", opts)
 
 vim.keymap.set('n', "<C-t>", ":tabnew<cr>", opts)
 
+vim.keymap.set('n', "<M-Left>", "<C-w><Left>", opts)
+vim.keymap.set('n', "<M-Right>", "<C-w><Right>", opts)
+vim.keymap.set('n', "<M-Up>", "<C-w><Up>", opts)
+vim.keymap.set('n', "<M-Down>", "<C-w><Down>", opts)
+
 vim.keymap.set('n', "<leader>n", function()
 	vim.opt.relativenumber = not vim.opt.relativenumber:get()
 end, opts)

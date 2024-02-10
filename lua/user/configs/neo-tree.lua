@@ -144,6 +144,10 @@ return function()
         ["?"] = "show_help",
         ["<"] = "prev_source",
         [">"] = "next_source",
+        ["<M-CR>"] = function(state)
+          require("neo-tree.command").execute({ action = "open" })
+          require("neo-tree.command").execute({ action = "close" })
+        end
       }
     },
     nesting_rules = {},
@@ -239,34 +243,33 @@ return function()
       "document_symbols",
     },
     source_selector = {
-      sources = {
-        "filesystem",
-        "buffers",
-        "git_status",
-        "document_symbols",
-      },
       --sources = {
-      --	{ source = "filesystem",       display_name = " 󰉓 Files " },
-      --	{ source = "git_status",       display_name = " 󰊢 Git " },
-      --	{ source = "document_symbols", display_name = " Outline " },
+      --  "filesystem",
+      --  "buffers",
+      --  "git_status",
+      --  "document_symbols",
       --},
-      --winbar = true,
+      sources = {
+        { source = "filesystem", display_name = " 󰉓 Files " },
+        { source = "git_status", display_name = " 󰊢 Git " },
+        { source = "buffers", display_name = " 󰈔 Buffs " },
+        { source = "document_symbols", display_name = "  Outline " },
+      },
+      winbar = true,
       --statusline = false
     },
     event_handlers = {
-      {
-        event = "file_opened",
-        handler = function(file_path)
-          -- auto close
-          -- vimc.cmd("Neotree close")
-          -- OR
-          print("About to close neo-tree")
-          require("neo-tree.command").execute({ action = "close" })
-        end
-      },
+      --{
+      --  event = "file_opened",
+      --  handler = function(file_path)
+      --    -- auto close
+      --    -- vimc.cmd("Neotree close")
+      --    -- OR
+      --    print("About to close neo-tree")
+      --    require("neo-tree.command").execute({ action = "close" })
+      --  end
+      --},
 
     }
   })
-
-  vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
 end

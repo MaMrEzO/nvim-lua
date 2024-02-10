@@ -261,7 +261,7 @@ local on_attach = function(client, bufnr)
 			 hi! link LspReferenceWrite Visual
 		  ]])
 
-		local gid = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+		local gid = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
 		vim.api.nvim_create_autocmd("CursorHold", {
 			group = gid,
 			buffer = bufnr,
@@ -378,7 +378,7 @@ local servers = {
 	'html',
 	'lua_ls',
 	'svelte',
-	'tailwindcss',
+	--'tailwindcss',
 	'tsserver',
 	'cssls',
 	--'buf_language_server',

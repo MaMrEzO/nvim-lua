@@ -1,0 +1,40 @@
+--local opts = require 'user.configs.mapping'
+--
+----local function mapYankToBalckHole(motions)
+----  for i = 1, 
+----end
+--
+--local function yankToBalckhole(chars)
+--  for i = 1, #chars do
+--    local c = chars:sub(i, i)
+--    vim.keymap.set('n', 'ci' .. c, '"_ci' .. c, opts)
+--    vim.keymap.set('n', 'ca' .. c, '"_ca' .. c, opts)
+--    vim.keymap.set('n', 'di' .. c, '"_di' .. c, opts)
+--    vim.keymap.set('n', 'da' .. c, '"_da' .. c, opts)
+--  end
+--end
+--
+--vim.keymap.set('n', 'ce', '"_ce', opts)
+--vim.keymap.set('n', 'de', '"_de', opts)
+--
+--vim.keymap.set('n', 'cb', '"_cb', opts)
+--vim.keymap.set('n', 'db', '"_db', opts)
+--
+--vim.keymap.set('n', 'cw', '"_cw', opts)
+--vim.keymap.set('n', 'dw', '"_dw', opts)
+--
+--vim.keymap.set('n', 'C', '"_C', opts)
+--vim.keymap.set('n', 'D', '"_D', opts)
+--
+--vim.keymap.set('n', 'dd', '"_dd', opts)
+--vim.keymap.set('n', 'cc', '"_cc', opts)
+--
+--vim.keymap.set('n', '<Del>', '"_d', opts)
+--vim.keymap.set('x', '<Del>', '"_d', opts)
+--vim.keymap.set('n', '<S-Del>', '"_diw', opts)
+--vim.keymap.set('s', '<DEL>', '<C-G>"_di', opts)
+--
+--vim.keymap.set('x', 'p', '"_dp', opts)
+--vim.keymap.set('x', 'P', '"_dP', opts)
+--
+--yankToBalckhole('\'"wW[]{}()<>')
