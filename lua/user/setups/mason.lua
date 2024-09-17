@@ -1,19 +1,19 @@
-require("mason").setup()
-require("mason-lspconfig").setup({
-	ensure_installed = {
-		--'cspells',
-		--'eslint',
-		--'golangci_lint_ls',
-		--'buf',
-		--'protolint',
-		--'grammarly',
-		'gopls',
-		'html',
-		'lua_ls',
-		'svelte',
-		'tailwindcss',
-		'tsserver',
-		'cssls',
-		'jsonls',
-	},
-})
+--require("mason").setup()
+--require("mason-lspconfig").setup({
+--	ensure_installed = {
+--		--'cspells',
+--		--'eslint',
+--		--'golangci_lint_ls',
+--		--'buf',
+--		--'protolint',
+--		--'grammarly',
+--		'gopls',
+--		'html',
+--		'lua_ls',
+--		'svelte',
+--		'tailwindcss',
+--		'tsserver',
+--		'cssls',
+--		'jsonls',
+--	},
+--})

@@ -3,19 +3,19 @@
 --local lsp_sig = require('lsp_signature')
 
 require("mason").setup()
-require('mason-lspconfig').setup {}
+require("mason-lspconfig").setup({})
 
-local use = require('packer').use
-require('packer').startup(function()
-	use 'neovim/nvim-lspconfig'  -- Collection of configurations for built-in LSP client
-	use 'hrsh7th/nvim-cmp'       -- Autocompletion plugin
-	use 'hrsh7th/cmp-nvim-lsp'   -- LSP source for nvim-cmp
-	use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
-	use 'L3MON4D3/LuaSnip'       -- Snippets plugin
-	use 'hrsh7th/cmp-buffer'
-	use 'hrsh7th/cmp-path'
-	use 'hrsh7th/cmp-cmdline'
-end)
+--ocal use = require("packer").use
+--require("packer").startup(function()
+--	use("neovim/nvim-lspconfig") -- Collection of configurations for built-in LSP client
+--	use("hrsh7th/nvim-cmp") -- Autocompletion plugin
+--	use("hrsh7th/cmp-nvim-lsp") -- LSP source for nvim-cmp
+--	use("saadparwaiz1/cmp_luasnip") -- Snippets source for nvim-cmp
+--	use("L3MON4D3/LuaSnip") -- Snippets plugin
+--	use("hrsh7th/cmp-buffer")
+--	use("hrsh7th/cmp-path")
+--	use("hrsh7th/cmp-cmdline")
+--end)
 
 --require "lsp-inlayhints".setup {
 --	inlay_hints = {
@@ -83,33 +83,35 @@ end
 --local capabilities = vim.lsp.protocol.make_client_capabilities()
 --capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '<C-,>', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', '<C-;>', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
+vim.keymap.set("n", "<C-,>", vim.diagnostic.goto_prev, opts)
+vim.keymap.set("n", "<C-;>", vim.diagnostic.goto_next, opts)
+vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
 
 local bufopts = { noremap = true, silent = true }
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 --vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
 --vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
 --vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-vim.keymap.set('i', '<M-k>', vim.lsp.buf.signature_help, bufopts)
-vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-vim.keymap.set('n', '<space>wl', function()
+vim.keymap.set("i", "<M-k>", vim.lsp.buf.signature_help, bufopts)
+vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
+vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
+vim.keymap.set("n", "<space>wl", function()
 	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 end, bufopts)
-vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
-vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, bufopts)
-vim.keymap.set('n', '<space>f', vim.lsp.buf.format, bufopts)
-vim.keymap.set('n', '<space>i', function() vim.lsp.buf.inlay_hint(0) end, bufopts)
+vim.keymap.set("n", "<space>D", vim.lsp.buf.type_definition, bufopts)
+vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, bufopts)
+vim.keymap.set("n", "<leader>a", vim.lsp.buf.code_action, bufopts)
+vim.keymap.set("n", "<space>f", vim.lsp.buf.format, bufopts)
+vim.keymap.set("n", "<space>i", function()
+	vim.lsp.buf.inlay_hint(0)
+end, bufopts)
 --vim.keymap.set('n', '<space>e', vim.lsp.diagnostic.show_position_diagnostics, bufopts)
 --vim.cmd([[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]])
 
@@ -127,7 +129,7 @@ local function print_table(node)
 		local cur_index = 1
 		for k, v in pairs(node) do
 			if (cache[node] == nil) or (cur_index >= cache[node]) then
-				if (string.find(output_str, "}", output_str:len())) then
+				if string.find(output_str, "}", output_str:len()) then
 					output_str = output_str .. ",\n"
 				elseif not (string.find(output_str, "\n", output_str:len())) then
 					output_str = output_str .. "\n"
@@ -138,44 +140,44 @@ local function print_table(node)
 				output_str = ""
 
 				local key
-				if (type(k) == "number" or type(k) == "boolean") then
+				if type(k) == "number" or type(k) == "boolean" then
 					key = "[" .. tostring(k) .. "]"
 				else
 					key = "['" .. tostring(k) .. "']"
 				end
 
-				if (type(v) == "number" or type(v) == "boolean") then
-					output_str = output_str .. string.rep('\t', depth) .. key .. " = " .. tostring(v)
-				elseif (type(v) == "table") then
-					output_str = output_str .. string.rep('\t', depth) .. key .. " = {\n"
+				if type(v) == "number" or type(v) == "boolean" then
+					output_str = output_str .. string.rep("\t", depth) .. key .. " = " .. tostring(v)
+				elseif type(v) == "table" then
+					output_str = output_str .. string.rep("\t", depth) .. key .. " = {\n"
 					table.insert(stack, node)
 					table.insert(stack, v)
 					cache[node] = cur_index + 1
 					break
 				else
-					output_str = output_str .. string.rep('\t', depth) .. key .. " = '" .. tostring(v) .. "'"
+					output_str = output_str .. string.rep("\t", depth) .. key .. " = '" .. tostring(v) .. "'"
 				end
 
-				if (cur_index == size) then
-					output_str = output_str .. "\n" .. string.rep('\t', depth - 1) .. "}"
+				if cur_index == size then
+					output_str = output_str .. "\n" .. string.rep("\t", depth - 1) .. "}"
 				else
 					output_str = output_str .. ","
 				end
 			else
 				-- close the table
-				if (cur_index == size) then
-					output_str = output_str .. "\n" .. string.rep('\t', depth - 1) .. "}"
+				if cur_index == size then
+					output_str = output_str .. "\n" .. string.rep("\t", depth - 1) .. "}"
 				end
 			end
 
 			cur_index = cur_index + 1
 		end
 
-		if (size == 0) then
-			output_str = output_str .. "\n" .. string.rep('\t', depth - 1) .. "}"
+		if size == 0 then
+			output_str = output_str .. "\n" .. string.rep("\t", depth - 1) .. "}"
 		end
 
-		if (#stack > 0) then
+		if #stack > 0 then
 			node = stack[#stack]
 			stack[#stack] = nil
 			depth = cache[node] == nil and depth + 1 or depth - 1
@@ -191,13 +193,12 @@ local function print_table(node)
 	--print(output_str)
 end
 
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
 	--lsp_sig.on_attach(client, bufnr)
 	-- Enable completion triggered by <c-x><c-o>
-	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -267,7 +268,7 @@ local on_attach = function(client, bufnr)
 			buffer = bufnr,
 			callback = function()
 				vim.lsp.buf.document_highlight()
-			end
+			end,
 		})
 
 		vim.api.nvim_create_autocmd("CursorMoved", {
@@ -275,7 +276,7 @@ local on_attach = function(client, bufnr)
 			buffer = bufnr,
 			callback = function()
 				vim.lsp.buf.clear_references()
-			end
+			end,
 		})
 	end
 	--require("lsp-inlayhints").on_attach(client, bufnr)
@@ -312,7 +313,7 @@ end
 --	--filetypes = {"js", "ts", "jsx", "tsx", "json", "json5"}
 --}
 --
-require 'lspconfig'.rust_analyzer.setup {
+require("lspconfig").rust_analyzer.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 	--cmd = {'~/.local/bin/rust-analyzer'}
@@ -330,65 +331,110 @@ require 'lspconfig'.rust_analyzer.setup {
 				},
 			},
 			procMacro = {
-				enable = true
+				enable = true,
 			},
-		}
-	}
-}
+		},
+	},
+})
+-- IMPORTANT: make sure to setup neodev BEFORE lspconfig
+require("neodev").setup({
+	-- add any options here, or leave empty to use the default settings
+})
 
-require 'lspconfig'.lua_ls.setup {
+require("lspconfig").lua_ls.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
 		Lua = {
 			library = {
 				"/usr/share/nvim/runtime/lua",
-				"/usr/share/nvim/runtime/lua/vim/lsp"
+				"/usr/share/nvim/runtime/lua/vim/lsp",
 			},
 			diagnostics = {
-				globals = { 'vim' }
-			}
-		}
-	}
-}
+				globals = { "vim" },
+			},
 
-require 'lspconfig'.gopls.setup {
+			completion = {
+				callSnippet = "Replace",
+			},
+		},
+	},
+})
 
+require("lspconfig").gopls.setup({
 	settings = {
 		gopls = {
+			analyses = {
+				unusedparams = true,
+			},
+			staticcheck = true,
+			gofumpt = true,
 			hints = {
 				assignVariableTypes = true,
 				compositeLiteralFields = true,
 				constantValues = true,
 				functionTypeParameters = true,
 				parameterNames = true,
-				rangeVariableTypes = true
+				rangeVariableTypes = true,
 			},
 		},
 	},
 	on_attach = on_attach,
 	capabilities = capabilities,
-}
+})
+
+--require("lspconfig").tsserver.setup({
+require("lspconfig").ts_ls.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	settings = {
+
+		typescript = {
+			inlayHints = {
+				includeInlayParameterNameHints = "all",
+				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+				includeInlayFunctionParameterTypeHints = true,
+				includeInlayVariableTypeHints = true,
+				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+				includeInlayPropertyDeclarationTypeHints = true,
+				includeInlayFunctionLikeReturnTypeHints = true,
+				includeInlayEnumMemberValueHints = true,
+			},
+		},
+		javascript = {
+			inlayHints = {
+				includeInlayParameterNameHints = "all",
+				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+				includeInlayFunctionParameterTypeHints = true,
+				includeInlayVariableTypeHints = true,
+				includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+				includeInlayPropertyDeclarationTypeHints = true,
+				includeInlayFunctionLikeReturnTypeHints = true,
+				includeInlayEnumMemberValueHints = true,
+			},
+		},
+	},
+})
 
 local servers = {
 	--'cspell',
 	--'eslint',
 	--'grammarly',
 	--buf',
-	'html',
-	'lua_ls',
-	'svelte',
+	"html",
+	"lua_ls",
+	"svelte",
 	--'tailwindcss',
-	'tsserver',
-	'cssls',
+	--"ts_ls",
+	"cssls",
 	--'buf_language_server',
-	'bufls'
+	"bufls",
 }
 for _, lsp in ipairs(servers) do
-	require('lspconfig')[lsp].setup {
+	require("lspconfig")[lsp].setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
-	}
+	})
 end
 
 --local eslint_config = require("lspconfig.server_configurations.eslint")

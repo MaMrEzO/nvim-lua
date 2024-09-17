@@ -1,14 +1,14 @@
-local use = require('packer').use
-require('packer').startup(function()
-  use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-  use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
-  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
-  use 'L3MON4D3/LuaSnip' -- Snippets plugin
-  use 'hrsh7th/cmp-buffer'
-  use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-cmdline'
-end)
+--local use = require('packer').use
+--require('packer').startup(function()
+--  use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
+--  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+--  use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+--  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+--  use 'L3MON4D3/LuaSnip' -- Snippets plugin
+--  use 'hrsh7th/cmp-buffer'
+--  use 'hrsh7th/cmp-path'
+--  use 'hrsh7th/cmp-cmdline'
+--end)
 
 local lspkind = require('lspkind')
 lspkind.init({
@@ -159,5 +159,6 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+	 --{ name = 'vim-dadbod-completion'}
   },
 }

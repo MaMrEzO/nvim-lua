@@ -29,12 +29,15 @@ local colors = {
 local branch = {
 	'branch',
 	icon = "",
+	on_click = function()
+		vim.cmd('Telescope git_branches')
+	end,
 }
 
 local filename = {
 	'filename',
 	on_click = function()
-		vim.cmd('Nvimtree reveal')
+		vim.cmd('Neotree reveal')
 	end,
 }
 
@@ -195,6 +198,7 @@ lualine.setup {
 		--component_separators = { left = '', right = '' },
 		--section_separators = { left = '', right = '' },
 		--theme = bubbles_theme,
+	   theme = "auto",
 		component_separators = '|',
 		section_separators = { left = '', right = '' },
 		disabled_filetypes = {
@@ -237,7 +241,9 @@ lualine.setup {
 		lualine_y = { 'filename' },
 		lualine_z = {}
 	},
-	tabline = {},
+	--tabline = {
+	--	lualine_a = { { 'tabs', separator = { left= '', right = ''},  mode = 1 } }
+	--},
 	--winbar = {
 	--	lualine_a = {},
 	--	lualine_b = { { 'filename', separator = { left = '' }, right_padding = 2 }, },

@@ -1,10 +1,8 @@
 return function()
-	require "notify".setup(
-		{
+	require("notify").setup({
 
-			render = "compact"
-			
+		render = "compact",
 
-		}
-	);
+		background_colour = "#000000",
+	})
 end
