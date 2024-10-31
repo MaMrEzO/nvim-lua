@@ -1,8 +1,9 @@
-local fn = vim.fn
 local noice_config = require("user.configs.noice-config")
 local notify_config = require("user.configs.notify-config")
 local neo_tree_config = require("user.configs.neo-tree")
 local nivm_window_picker = require("user.configs.nvim-window-picker")
+local todo_comments_config = require("user.configs.todo-comments-cfg")
+local stevearc_oil_cfgi = require("user.configs.stevearc_oil-cfgi")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -55,6 +56,7 @@ return require("lazy").setup({
 		},
 		config = neo_tree_config,
 	},
+	stevearc_oil_cfgi,
 	-- {
 	--	'nvim-neo-tree/neo-tree.nvim',
 	--	branch = 'v2.x',
@@ -78,7 +80,7 @@ return require("lazy").setup({
 	--	'nvim-telescope/telescope-fzf-native.nvim',
 	--	build = 'make',
 	--},
-	--'nvim-telescope/telescope-file-browser.nvim',
+	"nvim-telescope/telescope-file-browser.nvim",
 
 	---- gh github-cli
 	-- {
@@ -114,14 +116,14 @@ return require("lazy").setup({
 	--}
 
 	--Fancy bread crumb : ))))))
-	--{
-	--	"Bekaboo/dropbar.nvim", --3daffc1
-	--	commit = "3daffc1",
-	--	dependencies = {
-	--		"nvim-telescope/telescope-fzf-native.nvim",
-	--		build = "make",
-	--	},
-	--},
+	{
+		"Bekaboo/dropbar.nvim", --3daffc1
+		commit = "3daffc1",
+		dependencies = {
+			"nvim-telescope/telescope-fzf-native.nvim",
+			build = "make",
+		},
+	},
 	"ThePrimeagen/harpoon",
 
 	"luukvbaal/statuscol.nvim",
@@ -137,7 +139,12 @@ return require("lazy").setup({
 	{ "catppuccin/nvim", as = "catppuccin" },
 	"marko-cerovac/material.nvim",
 	"Shatur/neovim-ayu",
-
+	{
+		"folke/tokyonight.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
+	},
 	-- {
 	--	'folke/zen-mode.nvim',
 	--}
@@ -176,7 +183,30 @@ return require("lazy").setup({
 		"neovim/nvim-lspconfig",
 		build = ":MasonUpdate", -- :MasonUpdate updates registry contents
 	},
-
+	{
+		"antosha417/nvim-lsp-file-operations",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-neo-tree/neo-tree.nvim",
+		},
+		config = function()
+			require("lsp-file-operations").setup({
+				-- used to see debug logs in file `vim.fn.stdpath("cache") .. lsp-file-operations.log`
+				debug = false,
+				-- select which file operations to enable
+				operations = {
+					willRenameFiles = true,
+					didRenameFiles = true,
+					willCreateFiles = true,
+					didCreateFiles = true,
+					willDeleteFiles = true,
+					didDeleteFiles = true,
+				},
+				-- how long to wait (in milliseconds) for file rename information before cancelling
+				timeout_ms = 10000,
+			})
+		end,
+	},
 	"stevearc/conform.nvim",
 	"zapling/mason-conform.nvim",
 	--"mfussenegger/nvim-lint",
@@ -297,7 +327,7 @@ return require("lazy").setup({
 		end,
 	},
 
-	{
+	{ -- TODO: Check it not depends on RUST
 		-- d to dap-ext-vscode JSON decoder
 		"Joakker/lua-json5",
 		build = "./install.sh",
@@ -320,8 +350,18 @@ return require("lazy").setup({
 		"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
 	},
 	"saadparwaiz1/cmp_luasnip", -- Snippets source for nvim-cmp
-	"L3MON4D3/LuaSnip", -- Snippets plugin
-
+	{
+		"L3MON4D3/LuaSnip",
+		-- follow latest release.
+		version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+		-- install jsregexp (optional!).
+		build = "make install_jsregexp",
+	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = todo_comments_config,
+	},
 	--Colorize ansi output
 	-- { 'm00qek/baleia.nvim', tag = 'v1.3.0' }
 	"norcalli/nvim-terminal.lua",
@@ -360,7 +400,25 @@ return require("lazy").setup({
 	--		vim.g.db_ui_use_nerd_fonts = 1
 	--	end,
 	--},
+	{
+		"nvim-orgmode/orgmode",
+		event = "VeryLazy",
+		ft = { "org" },
+		config = function()
+			-- Setup orgmode
+			require("orgmode").setup({
+				org_agenda_files = "~/orgfiles/**/*",
+				org_default_notes_file = "~/orgfiles/refile.org",
+			})
 
+			-- NOTE: If you are using nvim-treesitter with ~ensure_installed = "all"~ option
+			-- add ~org~ to ignore_install
+			-- require('nvim-treesitter.configs').setup({
+			--   ensure_installed = 'all',
+			--   ignore_install = { 'org' },
+			-- })
+		end,
+	},
 	{
 		"iamcco/markdown-preview.nvim",
 		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },

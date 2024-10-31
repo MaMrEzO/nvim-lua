@@ -5,10 +5,10 @@ return function()
 	vim.api.nvim_create_autocmd("FileType", {
 		pattern = "dap-repl",
 		callback = function(ev)
-			print(string.format('event fired: %s', vim.inspect(ev)))
-			print(string.format('event fired: %s', vim.inspect(ev.buf)))
+			print(string.format("event fired: %s", vim.inspect(ev)))
+			print(string.format("event fired: %s", vim.inspect(ev.buf)))
 			terminal.attach_to_buffer(ev.buff)
-		end
+		end,
 	})
 
 	--vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWinEnter" }, {
@@ -25,14 +25,10 @@ return function()
 	--vim.cmd([[ autocmd FileType NvimTree setlocal relativenumber ]])
 	--vim.cmd([[ autocmd FileType NvimTree set relativenumber ]])
 	-- If you want icons for diagnostic errors, you'll need to define them somewhere:
-	vim.fn.sign_define("DiagnosticSignError",
-		{ text = " ", texthl = "DiagnosticSignError" })
-	vim.fn.sign_define("DiagnosticSignWarn",
-		{ text = " ", texthl = "DiagnosticSignWarn" })
-	vim.fn.sign_define("DiagnosticSignInfo",
-		{ text = " ", texthl = "DiagnosticSignInfo" })
-	vim.fn.sign_define("DiagnosticSignHint",
-		{ text = "", texthl = "DiagnosticSignHint" })
+	vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
+	vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
+	vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
+	vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
 	-- NOTE: this is changed from v1.x, which used the old style of highlight groups
 	-- in the form "LspDiagnosticsSignWarning"
 	require("neo-tree").setup({
@@ -41,8 +37,8 @@ return function()
 		enable_git_status = true,
 		enable_diagnostics = true,
 		open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
-		sort_case_insensitive = false,                                 -- used when sorting files and directories in the tree
-		sort_function = nil,                                           -- use a custom function for sorting files and directories in the tree
+		sort_case_insensitive = false, -- used when sorting files and directories in the tree
+		sort_function = nil, -- use a custom function for sorting files and directories in the tree
 		-- sort_function = function (a,b)
 		--       if a.type == b.type then
 		--           return a.path > b.path
@@ -55,7 +51,7 @@ return function()
 		},
 		default_component_configs = {
 			container = {
-				enable_character_fade = true
+				enable_character_fade = true,
 			},
 			indent = {
 				indent_size = 2,
@@ -78,7 +74,7 @@ return function()
 				-- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
 				-- then these will never be used.
 				default = "*",
-				highlight = "NeoTreeFileIcon"
+				highlight = "NeoTreeFileIcon",
 			},
 			modified = {
 				symbol = "[+]",
@@ -92,17 +88,17 @@ return function()
 			git_status = {
 				symbols = {
 					-- Change type
-					added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
-					modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-					deleted   = "✖", -- this can only be used in the git_status source
-					renamed   = "", -- this can only be used in the git_status source
+					added = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
+					modified = "", -- or "", but this is redundant info if you use git_status_colors on the name
+					deleted = "✖", -- this can only be used in the git_status source
+					renamed = "", -- this can only be used in the git_status source
 					-- Status type
 					untracked = "",
-					ignored   = "",
-					unstaged  = "",
-					staged    = "",
-					conflict  = "",
-				}
+					ignored = "",
+					unstaged = "",
+					staged = "",
+					conflict = "",
+				},
 			},
 			file_size = {
 				enabled = false,
@@ -160,8 +156,8 @@ return function()
 					-- this command supports BASH style brace expansion ("x{a,b,c}" -> xa,xb,xc). see `:h neo-tree-file-actions` for details
 					-- some commands may take optional config options, see `:h neo-tree-mappings` for details
 					config = {
-						show_path = "none" -- "none", "relative", "absolute"
-					}
+						show_path = "none", -- "none", "relative", "absolute"
+					},
 				},
 				["A"] = "add_directory", -- also accepts the optional config.show_path option like "add". this also supports BASH style brace expansion.
 				["d"] = "delete",
@@ -185,8 +181,8 @@ return function()
 				["<M-CR>"] = function(state)
 					require("neo-tree.command").execute({ action = "open" })
 					require("neo-tree.command").execute({ action = "close" })
-				end
-			}
+				end,
+			},
 		},
 		nesting_rules = {},
 		filesystem = {
@@ -213,9 +209,9 @@ return function()
 					--".null-ls_*",
 				},
 			},
-			follow_current_file = false,      -- This will find and focus the file in the active buffer every
+			follow_current_file = false, -- This will find and focus the file in the active buffer every
 			-- time the current file is changed while the tree is open.
-			group_empty_dirs = false,         -- when true, empty folders will be grouped together
+			group_empty_dirs = false, -- when true, empty folders will be grouped together
 			hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
 			-- in whatever position is specified in window.position
 			-- "open_current",  -- netrw disabled, opening a directory opens within the
@@ -245,7 +241,7 @@ return function()
 					["<C-p>"] = "move_cursor_up",
 				},
 			},
-			commands = {} -- Add a custom command or override a global one using the same function name
+			commands = {}, -- Add a custom command or override a global one using the same function name
 		},
 		buffers = {
 			follow_current_file = true, -- This will find and focus the file in the active buffer every
@@ -257,22 +253,22 @@ return function()
 					["bd"] = "buffer_delete",
 					["<bs>"] = "navigate_up",
 					["."] = "set_root",
-				}
+				},
 			},
 		},
 		git_status = {
 			window = {
 				position = "float",
 				mappings = {
-					["A"]  = "git_add_all",
+					["A"] = "git_add_all",
 					["gu"] = "git_unstage_file",
 					["ga"] = "git_add_file",
 					["gr"] = "git_revert_file",
 					["gc"] = "git_commit",
 					["gp"] = "git_push",
 					["gg"] = "git_commit_and_push",
-				}
-			}
+				},
+			},
 		},
 		sources = {
 			"filesystem",
@@ -301,7 +297,7 @@ return function()
 				event = "neo_tree_buffer_enter",
 				handler = function()
 					vim.opt_local.relativenumber = true
-					vim.opt_local.foldcolumn = '0'
+					vim.opt_local.foldcolumn = "0"
 					--print('Hum')
 				end,
 			},

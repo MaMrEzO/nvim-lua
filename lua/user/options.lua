@@ -15,7 +15,7 @@ local options = {
 	showmode = false, -- we don't need to see things like -- INSERT -- anymore
 	showtabline = 0, -- always show tabs
 	smartcase = true, -- smart case
-	smartindent = true, -- make indenting smarter again
+	smartindent = false, -- make indenting smarter again
 	splitbelow = false, -- force all horizontal splits to go below current window
 	splitright = false, -- force all vertical splits to go to the right of current window
 	swapfile = false, -- creates a swapfile
@@ -81,17 +81,23 @@ vim.filetype.add({
 
 ---- Normal        xxx guifg=#ced1d4 guibg=#262627
 ---- NormalNC      xxx guifg=#ced1d4 guibg=#232324
-vim.cmd("colorscheme darcula-solid")
+--vim.cmd("colorscheme darcula-solid")
 --vim.cmd('hi Normal guifg=#ced1d4 guibg=#232324')
 --vim.cmd('hi NormalNC guifg=#ced1d4 guibg=#232324')
-vim.cmd("hi CursorLine guibg=Grey10")
-vim.cmd("hi Visual guibg=Grey30")
-vim.cmd("hi! link Type Structure")
-vim.cmd("hi! link @property Structure")
-vim.cmd("hi! link @variable.builtin Keyword")
-vim.cmd("hi! link @constructor @tag")
-vim.cmd("hi! LspInlayHint guifg=#aaaa00 guibg=#4d4d4d")
-vim.cmd("hi! Statement guifg=#cd7832 gui=italic")
+
+--vim.cmd("colorscheme material-deep-ocean")
+
+--      Extra
+--vim.cmd("hi! link Type Structure")
+--vim.cmd("hi! link @property Structure")
+--vim.cmd("hi! link @variable.builtin Keyword")
+--vim.cmd("hi! link @constructor @tag")
+--vim.cmd("hi! LspInlayHint guifg=#aaaa00 guibg=#4d4d4d")
+--vim.cmd("hi! Statement guifg=#cd7832 gui=italic")
+--vim.cmd("hi CursorLine guibg=Grey10")
+--vim.cmd("hi Visual guibg=Grey30")
+--      Extra
+
 --CursorLine    xxx cterm=underline guibg=Grey40
 
 ----vim.cmd('let g:vim_markdown_conceal = 1')
@@ -150,6 +156,105 @@ vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 --vim.cmd('hi NormalNC guifg=#ced1d4 guibg=#232324')
+
+--require("catppuccin").setup({
+--	flavour = "auto", -- latte, frappe, macchiato, mocha
+--	background = { -- :h background
+--		light = "latte",
+--		dark = "mocha",
+--	},
+--	transparent_background = false, -- disables setting the background color.
+--	show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+--	term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+--	dim_inactive = {
+--		enabled = false, -- dims the background color of inactive window
+--		shade = "dark",
+--		percentage = 0.15, -- percentage of the shade to apply to the inactive window
+--	},
+--	no_italic = false, -- Force no italic
+--	no_bold = false, -- Force no bold
+--	no_underline = false, -- Force no underline
+--	styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+--		comments = { "italic" }, -- Change the style of comments
+--		conditionals = { "italic" },
+--		loops = {},
+--		functions = {},
+--		keywords = {},
+--		strings = {},
+--		variables = {},
+--		numbers = {},
+--		booleans = {},
+--		properties = {},
+--		types = {},
+--		operators = {},
+--		-- miscs = {}, -- Uncomment to turn off hard-coded styles
+--	},
+--	color_overrides = {},
+--	custom_highlights = {},
+--	default_integrations = true,
+--	integrations = {
+--		cmp = true,
+--		gitsigns = true,
+--		nvimtree = true,
+--		treesitter = true,
+--		notify = false,
+--		mini = {
+--			enabled = true,
+--			indentscope_color = "",
+--		},
+--		-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+--	},
+--})
+--
+---- setup must be called before loading
+--vim.cmd.colorscheme("catppuccin")
+require("tokyonight").setup({
+	-- use the night style
+	style = "night",
+	-- disable italic for functions
+	styles = {
+		functions = {},
+	},
+	-- Change the "hint" color to the "orange" color, and make the "error" color bright red
+	on_colors = function(colors)
+		colors.hint = colors.orange
+		colors.error = "#ff0000"
+	end,
+
+	on_highlights = function(hl, c)
+		local prompt = "#2d3149"
+		hl.TelescopeNormal = {
+			bg = c.bg_dark,
+			fg = c.fg_dark,
+		}
+		hl.TelescopeBorder = {
+			bg = c.bg_dark,
+			fg = c.bg_dark,
+		}
+		hl.TelescopePromptNormal = {
+			bg = prompt,
+		}
+		hl.TelescopePromptBorder = {
+			bg = prompt,
+			fg = prompt,
+		}
+		hl.TelescopePromptTitle = {
+			bg = prompt,
+			fg = prompt,
+		}
+		hl.TelescopePreviewTitle = {
+			bg = c.bg_dark,
+			fg = c.bg_dark,
+		}
+		hl.TelescopeResultsTitle = {
+			bg = c.bg_dark,
+			fg = c.bg_dark,
+		}
+	end,
+})
+vim.cmd([[colorscheme tokyonight-night]])
+vim.g.tokyonight_dark_float = false
+vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
 
 local soft_tab_2 = function()
 	vim.cmd("set tabstop=2 shiftwidth=2 expandtab")

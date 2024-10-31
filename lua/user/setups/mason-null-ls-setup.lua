@@ -29,12 +29,37 @@
 ------
 ------
 -----
---
---
+
+local function file_exists(filePath)
+	local f = io.open(filePath, "r")
+	return f ~= nil and io.close(f)
+end
+
+local function writeCspellFile(filePath)
+	local file = io.open(filePath, "w")
+	if file ~= nil then
+		file:write("{}")
+		file:close()
+	end
+end
+
+local function appenToFile(filePath, line)
+	local file = io.open(filePath, "a+")
+	if file ~= nil then
+		file:write("{}")
+		file:close()
+	end
+end
+
 local cspell_config = {
 	find_json = function(cwd)
-		print("Locating dic " .. cwd .. "/cspell.json")
-		return cwd .. "/cspell.json"
+		local filePath = cwd .. "/cspell.json"
+		if file_exists(filePath) then
+			return filePath
+		else
+			writeCspellFile(filePath)
+			return filePath
+		end
 	end,
 }
 local cspell = require("cspell")

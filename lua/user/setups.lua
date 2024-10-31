@@ -7,9 +7,11 @@ require("user.setups.symbol-outline")
 --require 'user.setups.indent_blankline';
 require("user.setups.gitsigns")
 require("user.setups.git-blame")
---require "user.setups.dropbar-setup";
+require("user.setups.dropbar-setup")
 require("user.setups.nvim-ufo")
 require("user.setups.statuscol-setup")
+require("user.setups.lua-snip")
+require("user.setups.org-mode")
 --
 --mappings
 --
@@ -23,7 +25,7 @@ require("flutter-tools").setup({}) -- use defaults
 require("user.mapping.flutter-toole-mapping")
 require("user.mapping.vim-fugitive")
 require("user.mapping.mapping")
---require 'user.mapping.dropbar-mapping';
+require("user.mapping.dropbar-mapping")
 require("user.mapping.theme")
 
 require("user.setups.highlight-colors")

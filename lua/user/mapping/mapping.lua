@@ -1,33 +1,37 @@
-local opts = require'user.configs.mapping'
+local opts = require("user.configs.mapping")
 
-vim.keymap.set('v', "<Tab>", '>gv', opts)
-vim.keymap.set('v', "<S-Tab>", '<gv', opts)
+vim.keymap.set("v", "<Tab>", ">gv", opts)
+vim.keymap.set("v", "<S-Tab>", "<gv", opts)
 
-vim.keymap.set('v', "<leader>(", '"xc(<C-r><C-o>x)<esc>', opts)
-vim.keymap.set('v', "<leader>'", '"xc\'<C-r><C-o>x\'<esc>', opts)
-vim.keymap.set('v', '<leader>"', '"xc"<C-r><C-o>x"<esc>', opts)
-vim.keymap.set('v', '<leader>`', '"xc`<C-r><C-o>x`<esc>', opts)
-vim.keymap.set('v', "<leader>[", '"xc[<C-r><C-o>x]<esc>', opts)
-vim.keymap.set('v', "<leader>{", '"xc{<CR><C-r><C-o>x<CR>}<esc>', opts)
+vim.keymap.set("v", "<leader>(", '"xc(<C-r><C-o>x)<esc>', opts)
+vim.keymap.set("v", "<leader>'", "\"xc'<C-r><C-o>x'<esc>", opts)
+vim.keymap.set("v", '<leader>"', '"xc"<C-r><C-o>x"<esc>', opts)
+vim.keymap.set("v", "<leader>`", '"xc`<C-r><C-o>x`<esc>', opts)
+vim.keymap.set("v", "<leader>[", '"xc[<C-r><C-o>x]<esc>', opts)
+vim.keymap.set("v", "<leader>{", '"xc{<CR><C-r><C-o>x<CR>}<esc>', opts)
 
-vim.keymap.set('v', "<space>p", ":diffput<cr>", opts)
-vim.keymap.set('v', "<space>g", ":diffget<cr>", opts)
+vim.keymap.set("v", "<space>p", ":diffput<cr>", opts)
+vim.keymap.set("v", "<space>g", ":diffget<cr>", opts)
 
+vim.keymap.set("n", "<C-t>", ":tabnew<cr>", opts)
 
-vim.keymap.set('n', "<C-t>", ":tabnew<cr>", opts)
+vim.keymap.set("n", "<M-Left>", "<C-w><Left>", opts)
+vim.keymap.set("n", "<M-h>", "<C-w><Left>", opts)
+vim.keymap.set("n", "<M-Right>", "<C-w><Right>", opts)
+vim.keymap.set("n", "<M-l>", "<C-w><Right>", opts)
+vim.keymap.set("n", "<M-Up>", "<C-w><Up>", opts)
+vim.keymap.set("n", "<M-k>", "<C-w><Up>", opts)
+vim.keymap.set("n", "<M-Down>", "<C-w><Down>", opts)
+vim.keymap.set("n", "<M-j>", "<C-w><Down>", opts)
 
-vim.keymap.set('n', "<M-Left>", "<C-w><Left>", opts)
-vim.keymap.set('n', "<M-Right>", "<C-w><Right>", opts)
-vim.keymap.set('n', "<M-Up>", "<C-w><Up>", opts)
-vim.keymap.set('n', "<M-Down>", "<C-w><Down>", opts)
-
-vim.keymap.set('n', "<leader>n", function()
+vim.keymap.set("n", "<leader>n", function()
 	vim.opt.relativenumber = not vim.opt.relativenumber:get()
 end, opts)
 
-vim.keymap.set('x', "<leader>p", '"_dp')
-vim.keymap.set('x', "<leader>P", '"_dP')
+vim.keymap.set("x", "<leader>p", '"_dp', opts)
+vim.keymap.set("x", "<leader>P", '"_dP', opts)
 
+vim.keymap.set("x", "<C-S-/>", ":NoiceDismiss<CR>", opts)
 
 --vim.keymap.set('x', "<Home>", '<NOP>')
 --vim.keymap.set('n', "<Home>", '<NOP>')

@@ -84,6 +84,17 @@ end
 --capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- Set global defaults for all servers
+local lspconfig = require("lspconfig")
+lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+	capabilities = vim.tbl_deep_extend(
+		"force",
+		vim.lsp.protocol.make_client_capabilities(),
+		-- returns configured operations if setup() was already called
+		-- or default operations if not
+		require("lsp-file-operations").default_capabilities()
+	),
+})
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions

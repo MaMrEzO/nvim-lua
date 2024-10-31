@@ -33,7 +33,7 @@ require("nvim-treesitter.configs").setup({
 	},
 
 	indent = {
-		disable = { "yaml" },
+		disable = { "yaml", "yml" },
 		enable = false,
 		module_path = "nvim-treesitter.indent",
 	},
